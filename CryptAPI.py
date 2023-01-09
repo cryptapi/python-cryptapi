@@ -21,6 +21,7 @@ class Helper:
         self.callback_url = callback_url
         self.parameters = parameters
         self.ca_params = ca_params
+        self.payment_Address = ''
 
     def get_address(self):
         if self.coin is None or self.own_address is None:
@@ -34,6 +35,7 @@ class Helper:
 
         _address = Helper.process_request(coin, endpoint='create', params=params)
         if _address:
+            self.payment_Address = _address['address_in']
             return _address
 
         return None
@@ -61,16 +63,12 @@ class Helper:
             return None
 
         params = {
-            'address': self.own_address,
+            'address': self.payment_Address,
             'size': size
         }
 
         if value:
-            params = {
-                'address': self.own_address,
-                'size': size,
-                'value': value
-            }
+            params['value'] = value
 
         _qrcode = Helper.process_request(self.coin, endpoint='qrcode', params=params)
 
