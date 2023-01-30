@@ -3,7 +3,7 @@ CryptAPI's Python Helper
 """
 
 import requests
-
+from requests.models import PreparedRequest
 
 class Helper:
     CRYPTAPI_URL = 'https://api.cryptapi.io/'
@@ -28,6 +28,12 @@ class Helper:
             return None
 
         coin = self.coin
+
+        if self.parameters:
+            req = PreparedRequest()
+            req.prepare_url(self.callback_url, self.parameters)
+            self.callback_url = req.url
+
         params = {
             'address': self.own_address,
             'callback': self.callback_url,
@@ -46,6 +52,11 @@ class Helper:
 
         if coin is None or callback_url is None:
             return None
+
+        if self.parameters:
+            req = PreparedRequest()
+            req.prepare_url(self.callback_url, self.parameters)
+            self.callback_url = req.url
 
         params = {
             'callback': callback_url

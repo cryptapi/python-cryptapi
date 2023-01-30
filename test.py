@@ -1,8 +1,10 @@
 import CryptAPI
 
-ca = CryptAPI.Helper('ltc', 'ltc1qsnpd4qyv9rtejrg2gg36mwax7a72u79rayjlcf',
-                     'https://webhook.site/90bf4674-3cf7-4f26-a6d6-cb72bb453aa8', None, {
-                        'order_id': 1345
+ca = CryptAPI.Helper('bep20_usdt', '0xA6B78B56ee062185E405a1DDDD18cE8fcBC4395d',
+                     'https://webhook.site/15d94bb3-c3ae-4b68-8120-5dd962988a6d', {
+                         'order_id': '1345e13232'
+                     }, {
+                         'convert': 1
                      })
 
 """
