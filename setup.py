@@ -30,7 +30,7 @@ setup(
     url='https://github.com/cryptapi/python-cryptapi',
     classifiers=[
         "Programming Language :: Python",
-        "Development Status :: 5 - stable",
+        "Development Status :: 5 - Production/Stable",
         "Framework :: Django",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
