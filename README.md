@@ -132,4 +132,7 @@ Contact us @ https://cryptapi.io/contacts/
 * Initial Release
 
 #### 1.0.1
-* Initial Release
+* Minor fixes
+
+#### 1.0.2
+* Minor fixes

@@ -10,7 +10,7 @@ setup(
 
     name='python-cryptapi',
 
-    version='1.0.1',
+    version='1.0.2',
 
     packages=find_packages(),
 
@@ -18,8 +18,7 @@ setup(
 
     author_email="info@cryptapi.io",
     install_requires=[
-        'django',
-        'requests',
+        'requests'
     ],
     description="Python Library for CryptAPI payment gateway",
     long_description_content_type="text/markdown",
