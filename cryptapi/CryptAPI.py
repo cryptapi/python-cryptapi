@@ -5,7 +5,7 @@ CryptAPI's Python Helper
 import requests
 from requests.models import PreparedRequest
 
-class Helper:
+class CryptAPIHelper:
     CRYPTAPI_URL = 'https://api.cryptapi.io/'
     CRYPTAPI_HOST = 'api.cryptapi.io'
 
@@ -39,7 +39,7 @@ class Helper:
             'callback': self.callback_url,
             **self.parameters, **self.ca_params}
 
-        _address = Helper.process_request(coin, endpoint='create', params=params)
+        _address = CryptAPIHelper.process_request(coin, endpoint='create', params=params)
         if _address:
             self.payment_Address = _address['address_in']
             return _address
@@ -62,7 +62,7 @@ class Helper:
             'callback': callback_url
         }
 
-        _logs = Helper.process_request(coin, endpoint='logs', params=params)
+        _logs = CryptAPIHelper.process_request(coin, endpoint='logs', params=params)
 
         if _logs:
             return _logs
@@ -81,7 +81,7 @@ class Helper:
         if value:
             params['value'] = value
 
-        _qrcode = Helper.process_request(self.coin, endpoint='qrcode', params=params)
+        _qrcode = CryptAPIHelper.process_request(self.coin, endpoint='qrcode', params=params)
 
         if _qrcode:
             return _qrcode
@@ -103,7 +103,7 @@ class Helper:
 
     @staticmethod
     def get_info(coin=''):
-        _info = Helper.process_request(coin, endpoint='info')
+        _info = CryptAPIHelper.process_request(coin, endpoint='info')
 
         if _info:
             return _info
@@ -112,7 +112,7 @@ class Helper:
 
     @staticmethod
     def get_supported_coins():
-        _info = Helper.get_info('')
+        _info = CryptAPIHelper.get_info('')
 
         _info.pop('fee_tiers', None)
 
@@ -135,7 +135,7 @@ class Helper:
             'priority': priority
         }
 
-        _estimate = Helper.process_request(coin, endpoint='estimate', params=params)
+        _estimate = CryptAPIHelper.process_request(coin, endpoint='estimate', params=params)
 
         if _estimate:
             return _estimate
@@ -149,12 +149,12 @@ class Helper:
 
         response = requests.get(
             url="{base_url}{coin}{endpoint}/".format(
-                base_url=Helper.CRYPTAPI_URL,
+                base_url=CryptAPIHelper.CRYPTAPI_URL,
                 coin=coin.replace('_', '/'),
                 endpoint=endpoint,
             ),
             params=params,
-            headers={'Host': Helper.CRYPTAPI_HOST},
+            headers={'Host': CryptAPIHelper.CRYPTAPI_HOST},
         )
 
         return response.json()

@@ -1,6 +1,7 @@
-import CryptAPI
+from cryptapi import CryptAPIHelper
 
-ca = CryptAPI.Helper('bep20_usdt', '0xA6B78B56ee062185E405a1DDDD18cE8fcBC4395d',
+
+ca = CryptAPIHelper('bep20_usdt', '0xA6B78B56ee062185E405a1DDDD18cE8fcBC4395d',
                      'https://webhook.site/15d94bb3-c3ae-4b68-8120-5dd962988a6d', {
                          'order_id': '1345e13232'
                      }, {
@@ -18,13 +19,13 @@ print(address)
 Get coin information
 """
 print('get_info:')
-print(CryptAPI.Helper.get_info('btc'))
+print(CryptAPIHelper.get_info('btc'))
 
 """
 Get all supported coins
 """
 print('get_supported_coins:')
-print(CryptAPI.Helper.get_supported_coins())
+print(CryptAPIHelper.get_supported_coins())
 
 """
 Get Logs

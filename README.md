@@ -26,15 +26,15 @@ or
 ### Importing in your project file
 
 ```python
-import CryptAPI
+from cryptapi import CryptAPIHelper
 ```
 
 ### Generating a new Address
 
 ```python
-import CryptAPI
+from cryptapi import CryptAPIHelper
 
-ca = CryptAPI.Helper(coin, myAddress, callbackUrl, params, cryptapiParams)
+ca = CryptAPIHelper(coin, myAddress, callbackUrl, params, cryptapiParams)
 
 address = ca.getAddress()['address_in']
 ```
@@ -55,9 +55,9 @@ Where:
 ### Checking the logs of a request
 
 ```python
-import CryptAPI
+from cryptapi import CryptAPIHelper
 
-ca = CryptAPI.Helper(coin, myAddress, callbackUrl, params, cryptapiParams)
+ca = CryptAPIHelper(coin, myAddress, callbackUrl, params, cryptapiParams)
 
 data = ca.get_logs()
 ```
@@ -66,9 +66,9 @@ data = ca.get_logs()
 ### Generating a QR code
 
 ```python
-import CryptAPI
+from cryptapi import CryptAPIHelper
 
-ca = CryptAPI.Helper(coin, myAddress, callbackUrl, params, cryptapiParams)
+ca = CryptAPIHelper(coin, myAddress, callbackUrl, params, cryptapiParams)
 
 ###
 
@@ -86,9 +86,9 @@ For QR Code generation:
 ### Estimating transaction fees
 
 ```python
-import CryptAPI
+from cryptapi import CryptAPIHelper
 
-fees = CryptAPI.Helper.get_estimate(coin, addresses, priority)
+fees = CryptAPIHelper.get_estimate(coin, addresses, priority)
 ```
 Where: 
 * ``coin`` is the coin you wish to check, from CryptAPI's supported currencies (e.g 'btc', 'eth', 'erc20_usdt', ...)
@@ -100,9 +100,9 @@ Where:
 ### Converting between coins and fiat
 
 ```python
-import CryptAPI
+from cryptapi import CryptAPIHelper
 
-conversion = CryptAPI.Helper.get_conversion(value, from_coin)
+conversion = CryptAPIHelper.get_conversion(value, from_coin)
 ```
 Where:
 * ``coin`` the target currency to convert to, from CryptAPI's supported currencies (e.g 'btc', 'eth', 'erc20_usdt', ...)
@@ -113,9 +113,9 @@ Where:
 
 ### Getting supported coins
 ```python
-import CryptAPI
+from cryptapi import CryptAPIHelper
 
-supportedCoins = CryptAPI.Helper.get_supported_coins()
+supportedCoins = CryptAPIHelper.get_supported_coins()
 ```
 
 > Response is an array with all supported coins.
@@ -135,4 +135,7 @@ Contact us @ https://cryptapi.io/contacts/
 * Minor fixes
 
 #### 1.0.2
+* Minor fixes
+
+#### 1.0.3
 * Minor fixes
