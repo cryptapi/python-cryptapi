@@ -94,7 +94,7 @@ class CryptAPIHelper:
             'value': value
         }
 
-        _value = Helper.process_request(self.coin, endpoint='convert', params=params)
+        _value = CryptAPIHelper.process_request(self.coin, endpoint='convert', params=params)
 
         if _value:
             return _value
