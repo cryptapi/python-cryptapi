@@ -88,7 +88,9 @@ For QR Code generation:
 ```python
 from cryptapi import CryptAPIHelper
 
-fees = CryptAPIHelper.get_estimate(coin, addresses, priority)
+ca = CryptAPIHelper(coin, myAddress, callbackUrl, params, cryptapiParams)
+
+fees = ca.get_estimate(coin, addresses, priority)
 ```
 Where: 
 * ``coin`` is the coin you wish to check, from CryptAPI's supported currencies (e.g 'btc', 'eth', 'erc20_usdt', ...)
@@ -102,7 +104,9 @@ Where:
 ```python
 from cryptapi import CryptAPIHelper
 
-conversion = CryptAPIHelper.get_conversion(value, from_coin)
+ca = CryptAPIHelper(coin, myAddress, callbackUrl, params, cryptapiParams)
+
+conversion = ca.get_conversion(value, from_coin)
 ```
 Where:
 * ``coin`` the target currency to convert to, from CryptAPI's supported currencies (e.g 'btc', 'eth', 'erc20_usdt', ...)

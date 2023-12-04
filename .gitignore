@@ -1,5 +1,5 @@
 .idea
 .DS_STORE
 __pycache__
-dist
+dist/
 python_cryptapi.egg-info
