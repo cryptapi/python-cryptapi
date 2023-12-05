@@ -36,7 +36,7 @@ from cryptapi import CryptAPIHelper
 
 ca = CryptAPIHelper(coin, myAddress, callbackUrl, params, cryptapiParams)
 
-address = ca.getAddress()['address_in']
+address = ca.get_address()['address_in']
 ```
 
 Where:
