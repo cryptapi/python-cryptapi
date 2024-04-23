@@ -5,16 +5,30 @@ CryptAPI's Python Helper
 import requests
 from requests.models import PreparedRequest
 
+
+class CryptAPIException(Exception):
+    pass
+
+
 class CryptAPIHelper:
     CRYPTAPI_URL = 'https://api.cryptapi.io/'
     CRYPTAPI_HOST = 'api.cryptapi.io'
 
     def __init__(self, coin, own_address, callback_url, parameters=None, ca_params=None):
-        if parameters is None:
+        if not parameters:
             parameters = {}
 
-        if ca_params is None:
+        if not ca_params:
             ca_params = {}
+
+        if not callback_url:
+            raise Exception("Callback URL is Missing")
+
+        if not coin:
+            raise Exception('Coin is Missing')
+
+        if not own_address:
+            raise Exception('Address is Missing')
 
         self.coin = coin
         self.own_address = own_address
@@ -24,9 +38,6 @@ class CryptAPIHelper:
         self.payment_Address = ''
 
     def get_address(self):
-        if self.coin is None or self.own_address is None:
-            return None
-
         coin = self.coin
 
         if self.parameters:
@@ -50,9 +61,6 @@ class CryptAPIHelper:
         coin = self.coin
         callback_url = self.callback_url
 
-        if coin is None or callback_url is None:
-            return None
-
         if self.parameters:
             req = PreparedRequest()
             req.prepare_url(self.callback_url, self.parameters)
@@ -62,17 +70,9 @@ class CryptAPIHelper:
             'callback': callback_url
         }
 
-        _logs = CryptAPIHelper.process_request(coin, endpoint='logs', params=params)
-
-        if _logs:
-            return _logs
-
-        return None
+        return CryptAPIHelper.process_request(coin, endpoint='logs', params=params)
 
     def get_qrcode(self, value='', size=300):
-        if self.coin is None:
-            return None
-
         params = {
             'address': self.payment_Address,
             'size': size
@@ -81,12 +81,7 @@ class CryptAPIHelper:
         if value:
             params['value'] = value
 
-        _qrcode = CryptAPIHelper.process_request(self.coin, endpoint='qrcode', params=params)
-
-        if _qrcode:
-            return _qrcode
-
-        return None
+        return CryptAPIHelper.process_request(self.coin, endpoint='qrcode', params=params)
 
     def get_conversion(self, from_coin, value):
         params = {
@@ -94,21 +89,11 @@ class CryptAPIHelper:
             'value': value
         }
 
-        _value = CryptAPIHelper.process_request(self.coin, endpoint='convert', params=params)
-
-        if _value:
-            return _value
-
-        return None
+        return CryptAPIHelper.process_request(self.coin, endpoint='convert', params=params)
 
     @staticmethod
     def get_info(coin=''):
-        _info = CryptAPIHelper.process_request(coin, endpoint='info')
-
-        if _info:
-            return _info
-
-        return None
+        return CryptAPIHelper.process_request(coin, endpoint='info')
 
     @staticmethod
     def get_supported_coins():
@@ -135,17 +120,14 @@ class CryptAPIHelper:
             'priority': priority
         }
 
-        _estimate = CryptAPIHelper.process_request(coin, endpoint='estimate', params=params)
-
-        if _estimate:
-            return _estimate
-
-        return None
+        return CryptAPIHelper.process_request(coin, endpoint='estimate', params=params)
 
     @staticmethod
-    def process_request(coin='', endpoint='', params=None):
-        if coin != '':
+    def process_request(coin=None, endpoint='', params=None):
+        if coin:
             coin += '/'
+        else:
+            coin = ''
 
         response = requests.get(
             url="{base_url}{coin}{endpoint}/".format(
@@ -157,4 +139,9 @@ class CryptAPIHelper:
             headers={'Host': CryptAPIHelper.CRYPTAPI_HOST},
         )
 
-        return response.json()
+        response_obj = response.json()
+
+        if response_obj.get('status') == 'error':
+            raise CryptAPIException(response_obj['error'])
+
+        return response_obj

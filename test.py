@@ -1,12 +1,17 @@
 from cryptapi import CryptAPIHelper
 
-
-ca = CryptAPIHelper('bep20_usdt', '0xA6B78B56ee062185E405a1DDDD18cE8fcBC4395d',
-                     'https://webhook.site/15d94bb3-c3ae-4b68-8120-5dd962988a6d', {
-                         'order_id': '1345e13232'
-                     }, {
-                         'convert': 1
-                     })
+ca = CryptAPIHelper(
+    'bep20_usdt',
+    '0xA6B78B56ee062185E405a1DDDD18cE8fcBC4395d',
+    'https://webhook.site/15d94bb3-c3ae-4b68-8120-5dd962988a6d',
+    {
+        'order_id': '1345e13232'
+    },
+    {
+        'convert': 1,
+        'multi_token': 1
+    }
+)
 
 """
 Get CA Address
